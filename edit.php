@@ -1,0 +1,56 @@
+<?php 
+include "connection.php";
+$edit = $_GET["id"];
+$sql = "select * from bookstore where id=$edit";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $Ubook_name = $_POST['name'];
+    $UAuthor_name = $_POST['author_name'];
+    $U_date = $_POST['date'];
+    $Ugenre = $_POST['genre'];
+    $Uformats = isset($_POST["formats"]) ? implode(",", $_POST["formats"]): "";
+    $conn->query("UPDATE bookstore SET name ='$Ubook_name', author_names ='$UAuthor_name', publish_date = '$U_date', genre='$Ugenre', formats='$Uformats' where id=$edit ");
+    header("Location:bookList.php");
+    exit();
+}
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+     <form method="POST">
+        <input type="text" name="name" id="name" value="<?= $row["name"]?>">
+        <input type="text" name="author_name" id="author_name"  value="<?= $row["author_names"]?>">
+        <input type="text" name="date" id="date" value="<?= $row["publish_date"]?>">
+
+        <!-- Genre dropdown -->
+        <label>Genre:</label>
+        <select name="genre">
+            <option value="Fiction" <?= $row['genre']=='Fiction'?'selected':'' ?>>Fiction</option>
+            <option value="Science" <?= $row['genre']=='Science'?'selected':'' ?>>Science</option>
+            <option value="History" <?= $row['genre']=='History'?'selected':'' ?>>History</option>
+        </select><br><br>
+
+        <!-- Format radio -->
+        <label>Format:</label><br>
+        <input type="checkbox" name="formats[]" value="Ebook" <?= $row['formats']=='Ebook'?'checked':'' ?>> Ebook<br>
+        <input type="checkbox" name="formats[]" value="Paperback" <?= $row['formats']=='Paperback'?'checked':'' ?>> Paperback<br>
+        <input type="checkbox" name="formats[]" value="Hardcover" <?= $row['formats']=='Hardcover'?'checked':'' ?>> Hardcover<br><br>
+        <button type="submit">Submit</button>
+
+        <!-- radio -->
+           <!-- <label>Available format:</label>
+          <input type="radio" name="formats" id="Ebook" value="Ebook">Ebook<br>
+          <input type="radio" name="formats" id="Paperback" value="Paperback">Paperback<br>
+          <input type="radio" name="formats" id="Hardcover" value="Hardcover">Hardcover<br> -->
+    </form>
+</body>
+</html>

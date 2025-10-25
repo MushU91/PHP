@@ -16,7 +16,7 @@
         }
         tr{
             margin: 20px;
-            padding: 50px~;
+            padding: 50px;
         }
     </style>
 </head>

@@ -29,6 +29,7 @@
             <th>Publish</th>
             <th>Genre</th>
             <th>Formats</th>
+            <th>CoverImage</th>
             <th>Action</th>
         </tr>
         <?php 
@@ -48,6 +49,13 @@
                     <td><?= $row["publish_date"]?></td>
                     <td><?= $row["genre"]?></td>
                     <td><?= $row["formats"]?></td>
+                    <td>
+                        <?php if(!empty($row["cover_image"])): ?>
+                        <img src="<?= $row["cover_image"] ?>" alt="cover" width="100" height="120">
+                        <?php endif; ?>
+                            
+                        
+                    </td>
                     <td>
                         <button><a href="edit.php?id=<?= $row["id"] ?>">Edit</a></button>
                         <button ><a href="delete.php?id=<?= $row["id"]?>">Delete</a></button>

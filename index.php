@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <form method="POST" action="create.php">
+    <form method="POST" action="create.php" enctype="multipart/form-data">
         <input type="text" name="name" id="name" placeholder="Enter Book Name">
         <input type="text" name="author_name" id="author_name"  placeholder="Enter Author Name">
         <input type="text" name="date" id="date" placeholder="Enter Date">
@@ -50,6 +50,10 @@
           <input type="radio" name="formats" id="Ebook" value="Ebook">Ebook<br>
           <input type="radio" name="formats" id="Paperback" value="Paperback">Paperback<br>
           <input type="radio" name="formats" id="Hardcover" value="Hardcover">Hardcover<br> -->
+
+          <!-- image upload -->
+           <label>Book Image</label>
+           <input type="file" name="cover_image" accept="image/*"><br><br>
         <button type="submit">Submit</button>
     </form>
 </body>
